@@ -27,5 +27,5 @@ input CreateProductInput {
 input UpdateProductInput {
   name: String
   type: String
-  id: Int!
+  id: ID!
 }

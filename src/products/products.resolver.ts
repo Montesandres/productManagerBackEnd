@@ -24,7 +24,7 @@ export class ProductsResolver {
   }
 
   @Mutation(() => Product)
-  updateProduct(@Args('updateProductInput') updateProductInput: UpdateProductInput) {
+  updateProduct(@Args('updateProductInput') updateProductInput: UpdateProductInput):Promise<Product> {
     return this.productsService.update(updateProductInput.id, updateProductInput);
   }
 

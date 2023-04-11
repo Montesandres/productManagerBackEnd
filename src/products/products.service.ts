@@ -33,8 +33,12 @@ export class ProductsService {
     return product
   }
 
-  update(id: number, updateProductInput: UpdateProductInput) {
-    return `This action updates a #${id} product`;
+  async update(id: string, updateProductInput: UpdateProductInput):Promise<Product> {
+      const product = await this.productsRepository.preload(updateProductInput)
+
+      if (!product) throw new NotFoundException(`Product with ID ${id} not found`)
+
+      return this.productsRepository.save(product)
   }
 
   remove(id: number) {
