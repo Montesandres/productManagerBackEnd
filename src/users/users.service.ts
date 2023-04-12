@@ -43,6 +43,17 @@ export class UsersService {
     }
   }
 
+  async findOneByID(id: string):Promise<User>{
+    try {
+      return await this.userRepository.findOneByOrFail({id})
+    } catch (error) {
+      this.handleDBErrors({
+        code:'error-001',
+        detail:`${id} not found`
+      })
+    }
+  }
+
 
   async findOne(id:string):Promise<User>{
     return new User;
