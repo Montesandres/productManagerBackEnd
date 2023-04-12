@@ -4,19 +4,25 @@ import { SignUpInput } from './dto/inputs/signup.input';
 import { AuthResponse } from './types/auth-response.type';
 import { UsersService } from 'src/users/users.service';
 import { LogInInput } from './dto/inputs/login.input';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        private readonly userService:UsersService
+        private readonly userService:UsersService,
+        private readonly jwtService:JwtService
     ){}
+
+    private getJwt(userID:string){
+        return this.jwtService.sign({id:userID})
+    }
 
     async signUp(signUpInput:SignUpInput):Promise<AuthResponse>{
 
         const user =  await this.userService.create(signUpInput)
 
-        const token = 'ABC1234'
+        const token =  this.getJwt(user.id);
 
         return {token,user}
     }
@@ -31,7 +37,7 @@ export class AuthService {
             throw new BadRequestException('Email not found or incorrect password')
         }
 
-        const token = 'ABC1234'
+        const token = this.getJwt(user.id);
 
 
         return{

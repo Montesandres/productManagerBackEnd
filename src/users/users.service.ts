@@ -16,6 +16,7 @@ export class UsersService {
     private readonly userRepository:Repository<User>){}
 
   async create(signUpInput: SignUpInput): Promise<User>{
+    
     try {
         const newUser = this.userRepository.create({
           ...signUpInput,
