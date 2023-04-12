@@ -8,6 +8,8 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { join } from 'path';
 
 import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { ProductsModule } from './products/products.module';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    UsersModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

@@ -29,7 +29,7 @@ export class ProductsResolver {
   }
 
   @Mutation(() => Product)
-  removeProduct(@Args('id', { type: () => Int }) id: number) {
+  removeProduct(@Args('id', { type: () => ID }) id: string):Promise<Product> {
     return this.productsService.remove(id);
   }
 }

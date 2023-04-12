@@ -8,15 +8,32 @@ type Product {
   type: String!
 }
 
+type User {
+  id: ID!
+  fullName: ID!
+  email: ID!
+  roles: [String!]!
+  isActive: Boolean!
+}
+
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
 type Query {
   products: [Product!]!
   product(id: ID!): Product!
+  users: [User!]!
+  user(id: ID!): User!
 }
 
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
-  removeProduct(id: Int!): Product!
+  removeProduct(id: ID!): Product!
+  blockUser(id: ID!): User!
+  singup(signUpInput: SignUpInput!): AuthResponse!
 }
 
 input CreateProductInput {
@@ -28,4 +45,10 @@ input UpdateProductInput {
   name: String
   type: String
   id: ID!
+}
+
+input SignUpInput {
+  email: String!
+  fullName: String!
+  password: String!
 }
